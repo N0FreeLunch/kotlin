@@ -110,7 +110,7 @@ private typealias ListItemListener = (Int, Int, View, View) -> Unit
 
 장황한 타입 정의를 별칭을 달아 반복적으로 사용하기 쉽게하는 것으로, 컴파일이 되면 다시 장황한 타입으로 변경된다. 타입 별칭은 변수 처럼 복사와 참조가 되는 것이 아니라, 장황한 코드를 간단히 대체하기 위함이다. 타입별칭을 장황한 타입 정의로 언제든지 대체해도 괜찮다.
 
-```php
+```kotlin
 data class User(val name: String)
 
 typealias Users = List<User>
@@ -134,4 +134,30 @@ fun main() {
 
 ## 타입별칭으로 라이브러리 타입 충돌 방지
 
+다음 예제의 두 코드는 동일한 코드이며, 타입 별칭만 부여하였다.
 
+```kotlin
+import thirdparty.Name
+
+class Foo {
+    val name1: Name
+    val name2: my.Name
+}
+```
+
+`import` 할 때는 .의 가장 마지막 이름이 타입이 된다. `import thirdparty.Name`의 타입은 `Name`이 된다.
+
+타입 부분에 .을 사용한 코드가 있다면 패키지에서 타입을 가져오는 것을 의미한다. `my` 패키지에서 `Name`이란 타입을 가져온 것이다.
+
+```kotlin
+import my.Name
+
+typealias ThirdPartyName = thirdparty.name
+
+class Foo {
+    val name1: ThirdPartyName
+    val name2: Name
+}
+```
+
+`my.Name`의 타입은 `Name`이 되고, `thirdparty.name`의 타입도 `name`이 되지만, 타입 별칭을 부여하여 `ThirdPartyName`가 되어 타입의 이름이 겹치지 않도록 하였다.
