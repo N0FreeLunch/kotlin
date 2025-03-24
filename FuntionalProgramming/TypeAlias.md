@@ -104,6 +104,34 @@ fun main() {
 private typealias ListItemListener = (Int, Int, View, View) -> Unit
 ```
 
-타입 별칭을 보면, private 접근 제한자를 사용한다. 타입 별칭에 사용할 수 있는 접근 제한자는 public, internal, private가 있고, private는 선언된 파일 안에서만 사용할 수 있고, internal은 같은 모듈에서만 접근할 수 있고, public은 어디에서든 이 타입에 접근할 수 있다는 차이점을 갖는다. 주의할 점은 protected 접근제한자는 사용할 수 없다는 점이다.
+타입 별칭을 보면, private 접근 제한자를 사용한다. 타입 별칭에 사용할 수 있는 접근 제한자는 public, internal, private가 있고, private는 선언된 파일 안에서만 사용할 수 있고, internal은 같은 모듈에서만 접근할 수 있고, public은 어디에서든 이 타입에 접근할 수 있다는 차이점을 갖는다. 주의할 점은 protected 접근　제한자는 타입 별칭에 사용할 수 없다는 점이다.
+
+## 타입 별칭의 특징
+
+장황한 타입 정의를 별칭을 달아 반복적으로 사용하기 쉽게하는 것으로, 컴파일이 되면 다시 장황한 타입으로 변경된다. 타입 별칭은 변수 처럼 복사와 참조가 되는 것이 아니라, 장황한 코드를 간단히 대체하기 위함이다. 타입별칭을 장황한 타입 정의로 언제든지 대체해도 괜찮다.
+
+```php
+data class User(val name: String)
+
+typealias Users = List<User>
+
+fun updateUsers(users: Users) {
+    users.forEach(::println)
+}
+
+fun main() {
+    val users: Users = listOf(User("Alice"), User("Bob"))
+
+    updateUsers(users)
+}
+```
+
+데이터 클래스 `data class User(val name: String)`를 사용하면, `toString()`의 값으로 `User(param=argValue)`으로 클래스(파라메터=인자로 전달한 값)의 꼴로 문자열이 출력된다.
+
+`Users` 타입을 타입 별칭으로 정의하여 여러 타입이 자리하는 곳에 별칭을 사용하였다.
+
+`::println`는 함수 참조를 의미하며, 코틀린에 내장된 함수를 직접 사용한다는 의미를 가진다. 함수 참조가 아닌 람다식을 사용해서 `users.forEach { user -> println(user) }`으로 사용해도 된다.
 
 ## 타입별칭으로 라이브러리 타입 충돌 방지
+
+
