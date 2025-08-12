@@ -26,8 +26,8 @@ fun main() {
 }
 
 ```
-- `val list = mutableListOf<String>("A", "B")`: 문자열로 이뤄진 컬렉션의 요소로 `"A"`, `"B"`가 주어졌을 때 ([`MutableList`](./-mutable-list.md)는 원소를 추가하고 제거할 수 있는 일반적인 컬렉션을 나타내는 타입, [`mutableListOf`](./mutable-list-of.md)는 인자를 받아 `MutableList` 타입의 컬렉션을 반환하는 함수)
-- `val moreItems: List<String> = listOf("C", "D")`: 추가할 컬렉션 요소로 `"C"`, `"D"`가 주어졌을 때 ([`List`](./-list.md)는 읽기 전용의 컬렉션을 나타내는 타입, [`listOf`](./list-of.md))는 `List` 타입의 컬렉션을 반환하는 함수
+- `val list = mutableListOf<String>("A", "B")`: 문자열로 이뤄진 컬렉션의 요소로 `"A"`, `"B"`가 주어졌을 때 ([`MutableList`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/)는 원소를 추가하고 제거할 수 있는 일반적인 컬렉션을 나타내는 타입, [`mutableListOf`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/mutable-list-of.html)는 인자를 받아 `MutableList` 타입의 컬렉션을 반환하는 함수)
+- `val moreItems: List<String> = listOf("C", "D")`: 추가할 컬렉션 요소로 `"C"`, `"D"`가 주어졌을 때 ([`List`]([./-list.md](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/))는 읽기 전용의 컬렉션을 나타내는 타입, [`listOf`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/list-of.html)는 `List` 타입의 컬렉션을 반환하는 함수
 - `list.addAll(moreItems)`: `MutableList`인 `list` 변수에 `addAll` 컬렉션 메소드를 통해서 `List` 타입의 컬렉션인 `moreItems` 변수를 대입하여 `list` 변수의 컬렉션에 요소를 추가한 것
 - `println(list)`: 최종 컬렉션의 값은 `MutableList`인 `[A, B, C, D]`가 반환된다.
 
@@ -39,7 +39,7 @@ fun <T> MutableCollection<in T>.addAll(elements: Sequence<T>): Boolean
 ```
 
 > Adds all elements of the given elements sequence to this MutableCollection.
-> 
+- 주어진 요소들의 모음(elements collection)으로 구성된 모든 요소를 이 MutableCollection에 추가한다.
 
 ### 예제
 
@@ -55,10 +55,10 @@ fun main() {
 
 ```
 
-- `val numbers = mutableListOf<Int>(1, 2)`: 문자열로 이뤄진 컬렉션의 요소로 `1`, `2`가 주어졌을 때  ([`MutableList`](./-mutable-list.md)는 원소를 추가하고 제거할 수 있는 일반적인 컬렉션을 나타내는 타입, [`mutableListOf`](./mutable-list-of.md)는 인자를 받아 `MutableList` 타입의 컬렉션을 반환하는 함수)
-- `val seq: Sequence<Int> = sequenceOf(3, 4, 5)`: 추가할 컬렉션 요소로 `1`, `2`, `3`이 주어졌을 때 ([`Sequence`](./-sequence.md)는 지연 연산을 제공하는 컬렉션을 나타내는 타입으로 메소드 사용을 했을 때 설정만 하고 실행을 하지 않는 기능 및 메소드를 사용했을 때 주어진 설정을 바탕으로 실행을 하는 메소드를 가진다. [`sequenceOf`](./list-of.md))는 `Sequence` 타입의 컬렉션을 반환하는 함수
+- `val numbers = mutableListOf<Int>(1, 2)`: 문자열로 이뤄진 컬렉션의 요소로 `1`, `2`가 주어졌을 때  ([`MutableList`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/)는 원소를 추가하고 제거할 수 있는 일반적인 컬렉션을 나타내는 타입, [`mutableListOf`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/mutable-list-of.html)는 인자를 받아 `MutableList` 타입의 컬렉션을 반환하는 함수)
+- `val seq: Sequence<Int> = sequenceOf(3, 4, 5)`: 추가할 컬렉션 요소로 `4`, `5`, `6`이 주어졌을 때 ([`Sequence`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.sequences/-sequence/)는 지연 연산을 제공하는 컬렉션을 나타내는 타입으로 메소드 사용을 했을 때 설정만 하고 실행을 하지 않는 기능 및 메소드를 사용했을 때 주어진 설정을 바탕으로 실행을 하는 메소드를 가진다. [`sequenceOf`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.sequences/sequence-of.html)는 `Sequence` 타입의 컬렉션을 반환하는 함수
 - `list.addAll(seq)`: `MutableList`인 `list` 변수에 `addAll` 컬렉션 메소드를 통해서 `Sequence` 타입의 컬렉션인 `seq` 변수를 대입하여 `list` 변수의 컬렉션에 요소를 추가한 것
-- `println(numbers)`: 최종 컬렉션의 값은 `MutableList`인 `[1, 2, 3, 4, 5]`가 반환된다.
+- `println(numbers)`: 최종 컬렉션의 값은 `MutableList`인 `[1, 2, 3, 4, 5]`가 반환된다.)
 
 
 ## Array 시그니처
@@ -67,6 +67,26 @@ fun main() {
 fun <T> MutableCollection<in T>.addAll(elements: Array<out T>): Boolean
 ```
 
+> Adds all elements of the given elements sequence to this MutableCollection.
+- 주어진 요소들의 모음(elements collection)으로 구성된 모든 요소를 이 MutableCollection에 추가한다.
+
+### 예제
+
+```kt
+fun main() {
+    val chars = mutableListOf<Char>('X', 'Y')
+
+    val moreChars: Array<Char> = arrayOf('A', 'B', 'C')
+    chars.addAll(moreChars)
+
+    println(chars) // [X, Y, A, B, C]
+}
+
+```
+- `val chars = mutableListOf<Char>('X', 'Y')`: 문자로 이뤄진 (문자열이 아닌 한 문자) 컬렉션의 요소로 `X`, `Y`가 주어졌을 때  ([`MutableList`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-mutable-list/)는 원소를 추가하고 제거할 수 있는 일반적인 컬렉션을 나타내는 타입, [`mutableListOf`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/mutable-list-of.html)는 인자를 받아 `MutableList` 타입의 컬렉션을 반환하는 함수, [`Char`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-char/)는 문자열을 저장하는 타입)
+- `val moreChars: Array<Char> = arrayOf('A', 'B', 'C')`: 추가할 컬렉션 요소로 `'A'`, `'B'`, `'C'`이 주어졌을 때 ([`Array`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/)는 문자를 나타내는 타입, [`arrayOf`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/array-of.html)는 `Array` 타입의 컬렉션을 반환하는 함수)
+- `chars.addAll(moreChars)`: `MutableList`인 `list` 변수에 `addAll` 컬렉션 메소드를 통해서 `Array` 타입의 컬렉션인 `moreChars` 변수를 대입하여 `chars` 변수의 컬렉션에 요소를 추가한 것
+- `println(chars)`: 최종 컬렉션의 값은 `MutableList`인 `[X, Y, A, B, C]`가 반환된다.
 
 ## References 
 - https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/add-all.html
