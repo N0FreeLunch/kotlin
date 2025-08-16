@@ -47,7 +47,7 @@ println(aggregated.values) // [0:3-6-9, 1:4-7, 2:5-8]
 
 ```
 - `val numbers = listOf(3, 4, 5, 6, 7, 8, 9)`: 리스트 자료구조의 값으로 3, 4, 5, 6, 7, 8, 9를 넣은 값을 만든다. [listOf](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/list-of.html)는 리스트 타입의 값을 반환하는 함수이다. [List](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/)는 순서가 있지만 키는 없는 자료구조로 위치값(인덱스)에 의해 순서를 판별하는 자료 구조이다. 배열은 크키를 변경할 수 없지만, 리스트는 크기가 동적으로 변경되는 자료구조이다.
-- `numbers.groupingBy { it % 3 }` : `numbers`라는 리스트 타입의 객체의 `groupingBy` 메소드로 콜백 람다 표현식의 `{ it % 3 }`에 따라 리스트의 각각의 순회의 요소값을 3으로 나눈 나머지 값을 기준으로 그룹핑하겠다는 의미를 가진다. `List` 타입은 코틀린의 [Collection](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/) 인터페이스의 구현체로 `groupingBy` 메소드는 `Collection` 인터페이스의 공통 메소드이다. [groupBy](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/group-by.html) 메소드는 Map 형식의 타입을 반환하는데 이는 그룹핑의 기준 값을 키로 하고 각각의 키에 대응하는 값으로 List 값을 만들기 때문이다.
+- `numbers.groupingBy { it % 3 }` : `numbers`라는 리스트 타입의 객체의 `groupingBy` 메소드로 콜백 람다 표현식의 `{ it % 3 }`에 따라 리스트의 각각의 순회의 요소값을 3으로 나눈 나머지 값을 기준으로 그룹핑하겠다는 의미를 가진다. `List` 타입은 코틀린의 [Collection](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/) 인터페이스의 구현체로 `groupingBy` 메소드는 `Collection` 인터페이스의 공통 메소드이다. [groupingBy]([https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/group-by.html](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/grouping-by.html) 메소드는 Grouping 형식의 타입을 반환하는데 이는 그룹핑의 기준 값을 키로 하고 각각의 키에 대응하는 값으로 List 값을 만들기 때문이다.
 
 ## References
 - https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/aggregate.html
