@@ -10,6 +10,7 @@ inline fun <T, K, R, M : MutableMap<in K, R>> Grouping<T, K>.aggregateTo(
 ```
 
 > Groups elements from the Grouping source by key and applies operation to the elements of each group sequentially, passing the previously accumulated value and the current element as arguments, and stores the results in the given destination map.
+- Grouping할 대상을 키에 따라 원소들을 그룹화 하고, 각 그룹의 원소에 순차적으로 연산을 적용한다. (이 연산을 적용할 때) 앞서 누적된 값과 현재의 (순회 대상) 원소를 인자로 전달하며, (연산 결과를 aggregateTo의 인자로) 주어진 맵에 저장한다.
 
 > The key for each element is provided by the Grouping.keyOf function.
 - 각각 요소의 키는 Grouping.keyOf 함수에 의해 제공된다.
