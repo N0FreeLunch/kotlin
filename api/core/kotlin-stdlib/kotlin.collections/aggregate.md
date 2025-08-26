@@ -12,9 +12,10 @@ inline fun <T, K, R> Grouping<T, K>.aggregate(
 - Grouping 소스의 요소들을 키(key)별로 그룹화한 뒤, 이전에 누적된 값과 현재의 요소를 인자로서 전달하여 각 그룹의 요소에 순차적으로 적용한다. 그리고 결과를 새로운 맵으로 저장한다.
 
 > The key for each element is provided by the Grouping.keyOf function.
-- 각 요소의 키는 Grouping.keyOf 함수에 의해 제공됩니다.
+- 각 요소의 키는 Grouping.keyOf 함수에 의해 제공된다.
 
 ### Return
+
 > a Map associating the key of each group with the result of aggregation of the group elements.
 - 그룹 원소의 집계 결과와 각 그룹의 키를 연관(키에 대응하는 값이 존재하는 형태)된 단일 Map(을 반환)
 
@@ -30,6 +31,16 @@ inline fun <T, K, R> Grouping<T, K>.aggregate(
 - `element`: 집계가 되고 있는 (그룹)소스의 요소 
 > `first`: indicates whether it's the first element encountered in the group.
 - `first`: 그룹 내에서 조우한 첫 번째 요소인지 아닌지 (불리언 값으로) 나타냄
+
+## 설명
+
+컬렉션 인터페이스의 구현체인 자료구조에 대해, 각 요소의 값을 기준으로 그룹으로 묶을 키를 생성하고, 키가 동일한 요소들 끼리 원본 컬렉션과 동일한 데이터 구조로 묶어 '키 - 묶인 데이터' 형태로 만든다.
+
+### 타입 파라메터
+
+타입 파라메터는 T, K, R 세 가지가 사용되고 있다. T 타입은 요소의 타입으로 element의 마지막 철자 T를 사용하였고, K는 키의 타입으로 key의 K이다. R은 accumulator의 마지막 철자 R을 사용하였고, 누적된 값을 의미한다.
+
+키의 타입이 K, 요소의 타입이 T인 Grouping 타입인 `Grouping<T, K>`에 대해 `aggregate` 확장함수를 사용한 결과 키의 타입이 K이고, 키에 대응하는 값이 누산된 값의 타입인 R이 되는 형태의 값을 만든다.
 
 ## 예제
 
