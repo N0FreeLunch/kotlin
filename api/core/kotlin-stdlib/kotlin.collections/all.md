@@ -1,0 +1,69 @@
+# all
+
+## 시그니처
+
+```
+inline fun <T> Array<out T>.all(predicate: (T) -> Boolean): Boolean
+```
+
+```
+inline fun ByteArray.all(predicate: (Byte) -> Boolean): Boolean
+```
+
+```
+inline fun ShortArray.all(predicate: (Short) -> Boolean): Boolean
+```
+
+```
+inline fun IntArray.all(predicate: (Int) -> Boolean): Boolean
+```
+
+```
+inline fun LongArray.all(predicate: (Long) -> Boolean): Boolean
+```
+
+```
+inline fun FloatArray.all(predicate: (Float) -> Boolean): Boolean
+```
+
+```
+inline fun DoubleArray.all(predicate: (Double) -> Boolean): Boolean
+```
+
+```
+inline fun BooleanArray.all(predicate: (Boolean) -> Boolean): Boolean
+```
+
+```
+inline fun CharArray.all(predicate: (Char) -> Boolean): Boolean
+```
+
+> Returns true if all elements match the given predicate.
+- 모든 요소가 주어진 술어(함수)를 만족하면 true를 반환한다.
+
+> Note that if the array contains no elements, the function returns true because there are no elements in it that do not match the predicate. See a more detailed explanation of this logic concept in "Vacuous truth" article.
+- 만약 배열이 원소를 포함하고 있지 않다면, 함수는 true를 반환한다. 이는 술어(함수)를 만족하지 않는 원소가 없기 때문이다. 이 논리 컨셉에 대한 좀 더 자세한 설명은 ["Vacuous truth"](https://en.wikipedia.org/wiki/Vacuous_truth)라는 글을 참고하라.
+
+## 설명
+
+`Array<T>`의 방식이 아니라, 각각의 원시 타입을 요소로 하는 고유한 배열 타입이 존재한다. 코틀린에서 배열이란 자료구조의 요소는 각각 고정된 사이즈를 가지고 있고, 배열의 크기(길이)도 고정되어 있다. 동적 언어의 `Array<T>`와 같이 타입을 지정하기 위해서는 배열의 원소가 교체 가능한 참조 방식 또는 가변 사이즈를 지원하는 방식으로 만들어져야 하는데, 코틀린의 배열은 고정된 사이즈를 가지고 있기 때문에 동일한 자료구조에 여러 타입을 지정하는 것은 불가능하다. 자바의 제네릭이 오브젝트에 대해서 성립하는 이유도 참조 주소라는 고정된 사이즈의 길이를 갖기 때문에 가능한 것이다.
+
+위의 ***Array의 경우 원시 타입의 값을 원소로 하는 배열이다. 원시 타입의 값의 최대 사이즈는 고정되어 있고, 각각 타입에 따라서 사이즈가 다를 수 있기 때문에, 요소의 원시 타입의 종류에 따라 배열의 종류도 여럿 나뉘게 된다.
+
+## 예제
+
+```kt
+val isEven: (Int) -> Boolean = { it % 2 == 0 }
+val zeroToTen = 0..10
+println("zeroToTen.all { isEven(it) } is ${zeroToTen.all { isEven(it) }}") // false
+println("zeroToTen.all(isEven) is ${zeroToTen.all(isEven)}") // false
+
+val evens = zeroToTen.map { it * 2 }
+println("evens.all { isEven(it) } is ${evens.all { isEven(it) }}") // true
+
+val emptyList = emptyList<Int>()
+println("emptyList.all { false } is ${emptyList.all { false }}") // true 
+```
+
+## References
+- https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/all.html
