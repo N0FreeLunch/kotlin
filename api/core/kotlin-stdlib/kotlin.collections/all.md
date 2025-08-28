@@ -64,6 +64,9 @@ println("evens.all { isEven(it) } is ${evens.all { isEven(it) }}") // true
 val emptyList = emptyList<Int>()
 println("emptyList.all { false } is ${emptyList.all { false }}") // true 
 ```
+- `val isEven: (Int) -> Boolean = { it % 2 == 0 }`: 짝수인지 판별하는 술어함수이다.
+- `val zeroToTen = 0..10`: [`IntRange`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/) 타입을 반환한다. 이는 배열과 달리 모든 요소를 메모리에 저장하는 방식이 아니라, 시작점과 끝점만 저장하고 요소를 순회할 때 요소의 값이 생성되는 레이지한 개념에 가까운 표현으로 연속된 대량의 범위의 값의 집합을 생성할 때도 사용할 수 있다.
+- [`IntRange`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/)의 시그니처를 보면, `IntProgression`의 상속을 받는데, `IntProgression`는 [`Iterable`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/) 인터페이스의 구현체로 인터페이스에는 함수의 시그니처 이외의 코드의 동작을 정의할 수 없기 때문에 Iterable 인터페이스는 all 메소드를 확장함수로 사용한다.
 
 ## References
 - https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/all.html
