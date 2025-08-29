@@ -67,6 +67,8 @@ println("emptyList.all { false } is ${emptyList.all { false }}") // true
 - `val isEven: (Int) -> Boolean = { it % 2 == 0 }`: 짝수인지 판별하는 술어함수이다.
 - `val zeroToTen = 0..10`: [`IntRange`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/) 타입을 반환한다. 이는 배열과 달리 모든 요소를 메모리에 저장하는 방식이 아니라, 시작점과 끝점만 저장하고 요소를 순회할 때 요소의 값이 생성되는 레이지한 개념에 가까운 표현으로 연속된 대량의 범위의 값의 집합을 생성할 때도 사용할 수 있다.
 - [`IntRange`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/)의 시그니처를 보면, `IntProgression`의 상속을 받는데, `IntProgression`는 [`Iterable`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/) 인터페이스의 구현체로 인터페이스에는 함수의 시그니처 이외의 코드의 동작을 정의할 수 없기 때문에 Iterable 인터페이스는 all 메소드를 확장함수로 사용한다.
+- `zeroToTen.all { isEven(it) }}`: `zeroToTen`는 1~10까지의 수를 가진다. 2,4,6,8,10은 짝수인지 판별하는 술어함수를 만족하지만, 1,3,5,7,9는 만족하지 않는다. `all` 확장 함수는 모든 요소들이 술어함수를 만족해야 하지만 그렇지 않으므로 최종적으로 false를 반환한다.
+- `zeroToTen.all(isEven)`: `zeroToTen.all { isEven(it) }}`가 람다 함수 표기인 반면, `all(isEven)`은 인자로 받는 함수의 시그니처가 `all` 파라메터로 받는 함수의 시그니처 `Int -> Boolean`와 동일한 경우 함수 참조 방식으로 함수 파라메터의 인자 전달을 생략할 수 있다.
 
 ## References
 - https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/all.html
