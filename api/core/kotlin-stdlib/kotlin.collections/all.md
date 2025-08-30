@@ -69,6 +69,10 @@ println("emptyList.all { false } is ${emptyList.all { false }}") // true
 - [`IntRange`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/)의 시그니처를 보면, `IntProgression`의 상속을 받는데, `IntProgression`는 [`Iterable`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/) 인터페이스의 구현체로 인터페이스에는 함수의 시그니처 이외의 코드의 동작을 정의할 수 없기 때문에 Iterable 인터페이스는 all 메소드를 확장함수로 사용한다.
 - `zeroToTen.all { isEven(it) }}`: `zeroToTen`는 1~10까지의 수를 가진다. 2,4,6,8,10은 짝수인지 판별하는 술어함수를 만족하지만, 1,3,5,7,9는 만족하지 않는다. `all` 확장 함수는 모든 요소들이 술어함수를 만족해야 하지만 그렇지 않으므로 최종적으로 false를 반환한다.
 - `zeroToTen.all(isEven)`: `zeroToTen.all { isEven(it) }}`가 람다 함수 표기인 반면, `all(isEven)`은 인자로 받는 함수의 시그니처가 `all` 파라메터로 받는 함수의 시그니처 `Int -> Boolean`와 동일한 경우 함수 참조 방식으로 함수 파라메터의 인자 전달을 생략할 수 있다.
+- `val evens = zeroToTen.map { it * 2 }`: 모든 요소에 2를 곱하여 짝수로 만든다.
+- `evens.all { isEven(it) }`: 모든 요소가 짝수이므로 `all` 확장 함수는 true를 반환한다.
+- `val emptyList = emptyList<Int>()`: 요소의 타입이 `Int`으로 제한되어 있지만, 요소가 없어 빈 요소가 되었다.
+- `emptyList.all { false }`: 빈 요소에 대한 `all` 메소드는 Vacuous truth의 개념이 적용되어 true가 된다.
 
 ## References
 - https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/all.html
