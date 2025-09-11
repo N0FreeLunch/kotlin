@@ -52,14 +52,17 @@ inline fun CharArray.all(predicate: (Char) -> Boolean): Boolean
 
 ## 예제
 
-1. Array<out T>.all
+#### `Array<out T>.all`
+
 ```kt
 val words = arrayOf("Kotlin", "Java", "Scala")
 val allStartWithCapital = words.all { it[0].isUpperCase() }
 println(allStartWithCapital) // true
 ```
+- `val words = arrayOf("Kotlin", "Java", "Scala")`: [`arrayOf`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/array-of.html)는 제네릭을 사용하여 제네릭으로 지정한 타입의 요소를 갖는 배열을 생성한다. 제네릭을 지정하지 않더라도 코틀린의 컴파일러는 요소의 타입을 통해서 제네릭에서 사용할 타입을 추론하여 제네릭을 자동으로 적용한다. 원시 타입을 갖는 배열 자료 구조인 `IntArray`, `DoubleArray`, `BooleanArray` 등과 달리 `arrayOf`는 원시 타입을 요소로 갖지 않고, 자바에서 제네릭이 오브젝트에 대해 성립하는 것과 같이 코틀린에서도 제네릭은 오브젝트에 대해 성립한다. `arrayOf`는 제네릭을 사용하므로 요소로 오브젝트를 가지며, 코틀린의 문자열은 자바와의 호환성을 위해 오브젝트이므로 배열의 요소를 문자열로 하기 위해서는 `arrayOf`를 사용한다.
+- `val allStartWithCapital = words.all { it[0].isUpperCase() }`: `words`가 문자열로 이뤄진 배열이므로 람다식의 `it`은 문자열 요소를 전달 받는다. 문자열의 첫 번째 글자 `it[0]`를 대문자인지 판단하는 술어 함수인 람다식이고 리턴 키워드가 없고 마지막 식이 반환되기 때문에 `it[0].isUpperCase()` 그 자체로 반환이 된다.
 
-2. ByteArray.all
+#### `ByteArray.all`
 
 ```kt
 val bytes = byteArrayOf(1, 2, 3)
@@ -68,7 +71,7 @@ println(allPositive) // true
 
 ```
 
-3. ShortArray.all
+#### `ShortArray.all`
 
 ```kt
 val shorts = shortArrayOf(100, 200, 300)
@@ -77,7 +80,7 @@ println(allLessThanThousand) // true
 
 ```
 
-4. IntArray.all
+#### `IntArray.all`
 
 ```kt
 val numbers = intArrayOf(2, 4, 6, 8)
@@ -86,7 +89,7 @@ println(allEven) // true
 
 ```
 
-5. LongArray.all
+#### `LongArray.all`
 
 ```kt
 val bigNumbers = longArrayOf(1L, 2L, 3L)
@@ -95,6 +98,41 @@ println(allPositive) // true
 
 ```
 
+#### `FloatArray.all`
+
+```kt
+val floats = floatArrayOf(1.2f, 3.4f, 5.6f)
+val allGreaterThanZero = floats.all { it > 0f }
+println(allGreaterThanZero) // true
+
+```
+
+#### `DoubleArray.all`
+
+```kt
+val doubles = doubleArrayOf(0.1, 0.2, 0.3)
+val allLessThanOne = doubles.all { it < 1.0 }
+println(allLessThanOne) // true
+
+```
+
+#### `BooleanArray.all`
+
+```kt
+val bools = booleanArrayOf(true, true, true)
+val allTrue = bools.all { it }
+println(allTrue) // true
+
+```
+
+#### `CharArray.all`
+
+```kt
+val chars = charArrayOf('a', 'b', 'c')
+val allLowerCase = chars.all { it.isLowerCase() }
+println(allLowerCase) // true
+
+```
 
 ---
 
