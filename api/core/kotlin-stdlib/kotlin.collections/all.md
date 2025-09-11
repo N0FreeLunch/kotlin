@@ -52,6 +52,64 @@ inline fun CharArray.all(predicate: (Char) -> Boolean): Boolean
 
 ## 예제
 
+1. Array<out T>.all
+```kt
+val words = arrayOf("Kotlin", "Java", "Scala")
+val allStartWithCapital = words.all { it[0].isUpperCase() }
+println(allStartWithCapital) // true
+```
+
+2. ByteArray.all
+
+```kt
+val bytes = byteArrayOf(1, 2, 3)
+val allPositive = bytes.all { it > 0 }
+println(allPositive) // true
+
+```
+
+3. ShortArray.all
+
+```kt
+val shorts = shortArrayOf(100, 200, 300)
+val allLessThanThousand = shorts.all { it < 1000 }
+println(allLessThanThousand) // true
+
+```
+
+4. IntArray.all
+
+```kt
+val numbers = intArrayOf(2, 4, 6, 8)
+val allEven = numbers.all { it % 2 == 0 }
+println(allEven) // true
+
+```
+
+5. LongArray.all
+
+```kt
+val bigNumbers = longArrayOf(1L, 2L, 3L)
+val allPositive = bigNumbers.all { it > 0 }
+println(allPositive) // true
+
+```
+
+
+---
+
+## 시그니처
+
+```
+inline fun <T> Iterable<T>.all(predicate: (T) -> Boolean): Boolean(source)
+```
+
+### 설명
+
+for문 등의 문법에 의해 순회 할 수 있고, 다양한 컬렉션 메소드를 갖는 인터페이스인 [`Iterable`](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-iterable/)의 all 메소드이다.
+
+## 예제
+
 ```kt
 val isEven: (Int) -> Boolean = { it % 2 == 0 }
 val zeroToTen = 0..10
