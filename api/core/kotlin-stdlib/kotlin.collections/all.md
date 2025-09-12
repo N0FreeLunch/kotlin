@@ -170,5 +170,35 @@ println("emptyList.all { false } is ${emptyList.all { false }}") // true
 - `val emptyList = emptyList<Int>()`: 요소의 타입이 `Int`으로 제한되어 있지만, 요소가 없어 빈 요소가 되었다.
 - `emptyList.all { false }`: 빈 요소에 대한 `all` 메소드는 Vacuous truth의 개념이 적용되어 true가 된다.
 
+---
+
+## 시그니처
+
+```
+inline fun <K, V> Map<out K, V>.all(predicate: (Map.Entry<K, V>) -> Boolean): Boolean
+```
+
+## 설명
+
+## 예제
+
+```kt
+val scores = mapOf("Alice" to 95, "Bob" to 80, "Charlie" to 70)
+
+val allPassed = scores.all { entry -> entry.value >= 60 }
+println(allPassed) // true
+
+```
+
+- (키, 벨류)의 쌍이 ("Alice", 95), ("Bob", 80), ("Charlie", 70)인 맵이 생성된다. 맵의 특징은 키가 중복되지 않는데, 동일한 키가 추가 되면 맵에 저장된 기존 키의 값은 새로운 값으로 덮어 씌워진다.
+- 맵이란 자료 구조를 사용할 때 키의 타입은 모두 같아야 하고, 값의 타입도 모두 같아야 한다. 코트린에서는 제네릭에 원시 타입을 세팅하면, 컴파일러가 자동으로 원시 타입에 대응하는 객체 타입으로 변환해서 저장한다.
+- 코틀린에서 맵은 이터러블의 하위 인터페이스가 아니라, 별도의 시그니처로 정의되어 있는데, 이터러블은 제네릭을 하나 사용하는 타입으로 정의 되어 있고, 맵은 제네릭을 두 개 사용하는 타입으로 정의 되는 서로 다른 시그니처이다.
+- 맵과 이터러블 각각에 `.method`로 접근하는 확장 함수를 각각 정의하고 있지만, 동일한 이름의 유사한 시그니처로 정의되어 있기 때문에 이름이 동일한 확장함수를 맵에서도 이터러블에서도 사용할 수 있다.
+- for문과 같은 코틀린 구문에서 맵도 이터러블도 사용할 수 있다. for문은 Set 타입을 대상으로 동작하며, 맵 인터페이스도, 이터러블 인터페이스도 Set 타입을 반환하는 entries 프로퍼티를 가지고 있고, 맵과 이터러블이 생성될 때 entries 프로퍼티가 생성되고 코틀린의 for문은 이 프로퍼티에 접근해서 변환된 Set 타입의 데이터로 순회한다.
+- `entry -> entry.value >= 60`: `entry`는 맵 객체이고, 이 객체의 `.key` `.value`로 키와 벨류에 접근할 수 있다.
+
+---
+
 ## References
+
 - https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/all.html
