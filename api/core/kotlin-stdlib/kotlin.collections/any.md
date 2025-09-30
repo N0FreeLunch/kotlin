@@ -131,7 +131,7 @@ println("emptyList.any { true } is ${emptyList.any { true }}") // false
 
 
 - `val odds = zeroToTen.map { it * 2 + 1 }`: 마찬가지로 [IntRange](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/)의 인터페이스인 `Iterable<Int>`의 [확장 함수인 map](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/map.html)으로 `inline fun <T, R> Iterable<T>.map(transform: (T) -> R): List<R>` 시그니처이다. `odds`는 `map` 함수의 반환 값이므로 `List<R>`의 타입이다.
-- `odds.any { isEven(it) }`: ` List<R>`는 타입 인터페이스이므로, 이 인터페이스 사양을 만족하는 `ArrayList<R>`, `LinkedList<R>` 등의 구현체가 런타임에는 반환된다. 여기서는 `ArrayList<Int>`가 반환된 것이고, `inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Booleann` 시그니처의 확장 함수가 사용되었다. 제네릭을 사용하는 경우는 보통 이 시그니처가 사용되며, 요소가 원시 타입을 사용하는 경우에는 `**Array.any()` 쪽이 사용된다.
+- `odds.any { isEven(it) }`: ` List<R>`는 타입 인터페이스이므로, 이 인터페이스 사양을 만족하는 `ArrayList<R>`, `LinkedList<R>` 등의 구현체가 런타임에는 반환된다. 여기서는 `ArrayList<Int>`가 반환된 것이고, `inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Booleann` 시그니처의 확장 함수가 사용되었다. 제네릭을 사용하는 경우는 보통 이 시그니처가 사용되며, 요소가 원시 타입을 사용하는 경우에는 `**Array.any()` 쪽이 사용된다. 실제 런타임에 생성되는 타입에 대해서는 성능 최적화를 고려할 정도가 아니라면 생각하지 않아도 된다. `ArrayList<R>`, `LinkedList<R>`등의 구현체는 코틀린의 내부 구현에 맡기고, 인터페이스에 부합하는 코드를 작성하면 된다.
 
 ---
 
