@@ -127,6 +127,11 @@ println("emptyList.any { true } is ${emptyList.any { true }}") // false
 - `val isEven: (Int) -> Boolean = { it % 2 == 0 }`: 짝수인지 판별하는 술어함수
 - `val zeroToTen = 0..10`: [IntRange](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/) 타입을 반환한다. 이는 배열과 달리 모든 요소를 메모리에 저장하는 방식이 아니라, 시작점과 끝점만 저장하고 요소를 순회할 때 요소의 값이 생성되는 레이지한 개념에 가까운 표현으로 연속된 대량의 범위의 값의 집합을 생성할 때도 사용할 수 있다.
 - `zeroToTen.any { isEven(it) }`: IntRange의 시그니처를 보면, [IntProgression](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-progression/)의 상속을 받는데, `Iterable<Int>` 인터페이스의 구현체이다. 이는 위의 `inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Boolean` 시그니처에 해당하는 any 확장함수이다. 이 확장함수는 `(T) -> Boolean` 시그니처의 함수를 받는데, `isEven`는 이 시그니처에 부합하는 함수이므로 `.any { n -> isEven(n) }`와 동일한 람다함수 표기이다.
+- `zeroToTen.any(isEven)}`: 람다 표기법이 아닌 그냥 함수로 전달하는 방식의 코드이다.
+
+
+- `val odds = zeroToTen.map { it * 2 + 1 }`: 마찬가지로 [IntRange](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/)의 인터페이스인 `Iterable<Int>`의 [확장 함수인 map](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/map.html)으로 `inline fun <T, R> Iterable<T>.map(transform: (T) -> R): List<R>` 시그니처이다. `odds`는 `map` 함수의 반환 값이므로 `List<R>`의 타입이다.
+- `odds.any { isEven(it) }`: ` List<R>`는 타입 인터페이스이므로, 이 인터페이스 사양을 만족하는 `ArrayList<R>`, `LinkedList<R>` 등의 구현체가 런타임에는 반환된다. 여기서는 `ArrayList<Int>`가 반환된 것이고, `inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Booleann` 시그니처의 확장 함수가 사용되었다. 제네릭을 사용하는 경우는 보통 이 시그니처가 사용되며, 요소가 원시 타입을 사용하는 경우에는 `**Array.any()` 쪽이 사용된다.
 
 ---
 
@@ -142,7 +147,7 @@ fun <T> Iterable<T>.any(): Boolean
 
 - 컬렉션이 적어도 하나의 요소를 가지면 true를 반환한다.
 
-## 
+## 예제
 
 ```kt
 val emptyList = emptyList<Int>()
