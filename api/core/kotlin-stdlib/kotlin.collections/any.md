@@ -63,7 +63,7 @@ println("nonEmptyList.any() is ${nonEmptyList.any()}") // true
 ## 시그니처
 
 ```
-inline fun <T> Array<out T>.any(predicate: (T) -> Boolean): Boolean(source)
+inline fun <T> Array<out T>.any(predicate: (T) -> Boolean): Boolean
 ```
 
 ```
@@ -123,6 +123,10 @@ val emptyList = emptyList<Int>()
 println("emptyList.any { true } is ${emptyList.any { true }}") // false 
 
 ```
+
+- `val isEven: (Int) -> Boolean = { it % 2 == 0 }`: 짝수인지 판별하는 술어함수
+- `val zeroToTen = 0..10`: [IntRange](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-range/) 타입을 반환한다. 이는 배열과 달리 모든 요소를 메모리에 저장하는 방식이 아니라, 시작점과 끝점만 저장하고 요소를 순회할 때 요소의 값이 생성되는 레이지한 개념에 가까운 표현으로 연속된 대량의 범위의 값의 집합을 생성할 때도 사용할 수 있다.
+- `zeroToTen.any { isEven(it) }`: IntRange의 시그니처를 보면, [IntProgression](https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.ranges/-int-progression/)의 상속을 받는데, `Iterable<Int>` 인터페이스의 구현체이다. 이는 위의 `inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Boolean` 시그니처에 해당하는 any 확장함수이다. 이 확장함수는 `(T) -> Boolean` 시그니처의 함수를 받는데, `isEven`는 이 시그니처에 부합하는 함수이므로 `.any { n -> isEven(n) }`와 동일한 람다함수 표기이다.
 
 ---
 
@@ -244,17 +248,17 @@ println("nonEmptyList.any() is ${nonEmptyList.any()}") // true
 
 ```
 @ExperimentalUnsignedTypes
-inline fun UIntArray.any(predicate: (UInt) -> Boolean): Boolean(source)
+inline fun UIntArray.any(predicate: (UInt) -> Boolean): Boolean
 ```
 
 ```
 @ExperimentalUnsignedTypes
-inline fun ULongArray.any(predicate: (ULong) -> Boolean): Boolean(source)
+inline fun ULongArray.any(predicate: (ULong) -> Boolean): Boolean
 ```
 
 ```
 @ExperimentalUnsignedTypes
-inline fun UByteArray.any(predicate: (UByte) -> Boolean): Boolean(source)
+inline fun UByteArray.any(predicate: (UByte) -> Boolean): Boolean
 ```
 
 ```
