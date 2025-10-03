@@ -144,6 +144,8 @@ val emptyList = emptyList<Int>()
 println("emptyList.any { true } is ${emptyList.any { true }}") // false
 
 ```
+- `val emptyList = emptyList<Int>()`: Int 타입의 빈 List 컬렉션을 만든다.
+- `emptyList.any { true }`: `emptyList.any { it -> true }`와 동일한 표현으로 `it`이 생략된 표현 방식이다. 여기서 `any`에 적용되는 시그니처는 `inline fun <T> Iterable<T>.any(predicate: (T) -> Boolean): Boolean`에 해당한다.
 
 ---
 
@@ -164,11 +166,17 @@ fun <T> Iterable<T>.any(): Boolean
 ```kt
 val emptyList = emptyList<Int>()
 println("emptyList.any() is ${emptyList.any()}") // false
+```
 
-val nonEmptyList = listOf(1, 2, 3)
-println("nonEmptyList.any() is ${nonEmptyList.any()}") // true
+- `val emptyList = emptyList<Int>()`: Int 타입의 빈 List 컬렉션을 만든다.
+- `emptyList.any()`: any에 어떠한 인자도 전해지지 않은 `fun <T> Iterable<T>.any(): Boolean` 시그니처에 해당한다.
 
 ```
+val nonEmptyList = listOf(1, 2, 3)
+println("nonEmptyList.any() is ${nonEmptyList.any()}") // true
+```
+- `val nonEmptyList = listOf(1, 2, 3)`: Int 타입의 비어있지 않은 List 컬렉션을 만든다.
+- `nonEmptyList.any()`: 인자로 아무것도 전달되지 않을 때는 요소가 유무로 참 거짓을 반환하므로 요소가 있으므로 `true`를 반환한다.
 
 ---
 
@@ -185,13 +193,16 @@ fun <K, V> Map<out K, V>.any(): Boolean
 ## 예제
 
 ```kt
-val emptyList = emptyList<Int>()
-println("emptyList.any() is ${emptyList.any()}") // false
+val emptyMap = emptyMap<String, Int>()
+val nonEmptyMap = mapOf("a" to 1, "b" to 2)
 
-val nonEmptyList = listOf(1, 2, 3)
-println("nonEmptyList.any() is ${nonEmptyList.any()}") // true
-
+println("emptyMap.any() = ${emptyMap.any()}")       // false
+println("nonEmptyMap.any() = ${nonEmptyMap.any()}") // true
 ```
+- `val emptyMap = emptyMap<String, Int>()`: 요소의 키가 String, 요소의 값이 Int 타입인 Map 자료 유형의 빈 컬렉션을 만든다.
+- `val nonEmptyMap = mapOf("a" to 1, "b" to 2)`: Map 자료 유형의 각 요소로 전달된 값이, String, Int으로 된 데이터가 세팅된 요소의 키가 String, 요소의 값이 Int 타입인 Map 자료 유형이 생성된다.
+- `emptyMap.any()`: 요소가 없는 빈 맵이므로 false
+- `nonEmptyMap.any()`: 요소가 존재하는 맵이므로 true
 
 ---
 
