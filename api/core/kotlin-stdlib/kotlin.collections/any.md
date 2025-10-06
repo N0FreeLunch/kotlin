@@ -171,7 +171,7 @@ println("emptyList.any() is ${emptyList.any()}") // false
 - `val emptyList = emptyList<Int>()`: Int 타입의 빈 List 컬렉션을 만든다.
 - `emptyList.any()`: any에 어떠한 인자도 전해지지 않은 `fun <T> Iterable<T>.any(): Boolean` 시그니처에 해당한다.
 
-```
+```kt
 val nonEmptyList = listOf(1, 2, 3)
 println("nonEmptyList.any() is ${nonEmptyList.any()}") // true
 ```
@@ -219,18 +219,31 @@ inline fun <K, V> Map<out K, V>.any(predicate: (Map.Entry<K, V>) -> Boolean): Bo
 ## 예제
 
 ```kt
-val isEven: (Int) -> Boolean = { it % 2 == 0 }
-val zeroToTen = 0..10
-println("zeroToTen.any { isEven(it) } is ${zeroToTen.any { isEven(it) }}") // true
-println("zeroToTen.any(isEven) is ${zeroToTen.any(isEven)}") // true
+val ages = mapOf(
+    "Alice" to 25,
+    "Bob" to 32,
+    "Charlie" to 17,
+    "Diana" to 29
+)
 
-val odds = zeroToTen.map { it * 2 + 1 }
-println("odds.any { isEven(it) } is ${odds.any { isEven(it) }}") // false
+// Check if there is anyone under 18
+val hasMinor = ages.any { it.value < 18 }
+println("Has a minor: $hasMinor") // true (Charlie)
 
-val emptyList = emptyList<Int>()
-println("emptyList.any { true } is ${emptyList.any { true }}") // false 
+// Check if all names start with 'A' — this uses any to show the opposite case
+val hasNameNotStartingWithA = ages.any { !it.key.startsWith("A") }
+println("Has name not starting with A: $hasNameNotStartingWithA") // true
+
+// Check if anyone is exactly 30 years old
+val hasThirty = ages.any { entry -> entry.value == 30 }
+println("Has someone aged 30: $hasThirty") // false
 
 ```
+
+- `val ages = mapOf("Alice" to 25, "Bob" to 32, "Charlie" to 17, "Diana" to 29)`: 키가 String, 값이 정수인 Map 자료 유형의 값을 생성한다.
+- `val hasMinor = ages.any { it.value < 18 }`: 나이가 기준 미만인 사람이 있는지의 결과를 반환하는 것으로, 람다함수는 각 요소를 받아 해당 요소의 value가 18 미만인 대상이 존재하는지 확인한다.
+- `val hasNameNotStartingWithA = ages.any { !it.key.startsWith("A") }`: 이름이 A로 시작하지 않는 요소가 있는지 확인하는 결과를 반환하는 것으로, 이 자료 구조에서는 키가 사람의 이름이므로 `it.key`로 접근하고, `key`가 문자열이므로 `startsWith` 확장함수를 사용할 수 있으며, 문자열이 A로 시작하지 않는지 확인한다.
+- `val hasThirty = ages.any { entry -> entry.value == 30 }`: 30살인 요소가 있는지 확인하는 것으로 파라메터를 포함한 람다함수를 전달 받아 생략형인 `it`을 사용하지 않는 방식으로 활용되었다. Map 요소의 값을 접근하므로 `entry.value`으로 확인한다.
 
 ---
 
