@@ -269,6 +269,10 @@ inline fun UByteArray.any(): Boolean
 inline fun UShortArray.any(): Boolean
 ```
 
+`@ExperimentalUnsignedTypes` 에노테이션은 kotlin의 정식 API에는 추후 내부 동작의 변경 가능성이 있는 실험적인 도입인 것을 알려주기 위한 용도로 사용되었다.
+
+컴파일 할 때, 이 에노테이션이 있는 부분을 알려줄 수 있기 때문에, 버전업을 진행할 때, 문제가 될 수 있는 대상을 골라서 찾아내기 위한 용도 및 이 기능을 사용할 때는 추후 변할 수 있다는 것을 다른 개발자에게 알리고 주의를 주기 위한 용도의 에노테이션이라고 이해하면 된다.
+
 ## 설명
 
 > Returns true if array has at least one element.
@@ -276,12 +280,22 @@ inline fun UShortArray.any(): Boolean
 ## 예제
 
 ```kt
-val emptyList = emptyList<Int>()
-println("emptyList.any() is ${emptyList.any()}") // false
+val uints: UIntArray = uintArrayOf(1u, 2u, 3u)
+val emptyUInts: UIntArray = uintArrayOf()
 
-val nonEmptyList = listOf(1, 2, 3)
-println("nonEmptyList.any() is ${nonEmptyList.any()}") // true 
+println("uints.any() = ${uints.any()}")           // true (not empty)
+println("emptyUInts.any() = ${emptyUInts.any()}") // false (empty)
+
+val ulongs: ULongArray = ulongArrayOf(10uL, 20uL)
+val ubytes: UByteArray = ubyteArrayOf(0u, 255u)
+val ushorts: UShortArray = ushortArrayOf(100u, 200u)
+
+println("ulongs.any() = ${ulongs.any()}")   // true
+println("ubytes.any() = ${ubytes.any()}")   // true
+println("ushorts.any() = ${ushorts.any()}") // true
 ```
+
+- 
 
 ---
 
@@ -312,20 +326,6 @@ inline fun UShortArray.any(predicate: (UShort) -> Boolean): Boolean
 > Returns true if at least one element matches the given predicate.
 
 ## 예제
-
-```kt
-val isEven: (Int) -> Boolean = { it % 2 == 0 }
-val zeroToTen = 0..10
-println("zeroToTen.any { isEven(it) } is ${zeroToTen.any { isEven(it) }}") // true
-println("zeroToTen.any(isEven) is ${zeroToTen.any(isEven)}") // true
-
-val odds = zeroToTen.map { it * 2 + 1 }
-println("odds.any { isEven(it) } is ${odds.any { isEven(it) }}") // false
-
-val emptyList = emptyList<Int>()
-println("emptyList.any { true } is ${emptyList.any { true }}") // false 
-
-```
 
 ## References
 
