@@ -295,8 +295,6 @@ println("ubytes.any() = ${ubytes.any()}")   // true
 println("ushorts.any() = ${ushorts.any()}") // true
 ```
 
-- 
-
 ---
 
 ## 시그니처
